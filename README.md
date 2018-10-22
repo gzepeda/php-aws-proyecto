@@ -1,2 +1,9 @@
-# PHPGlobalAzureSample
-Sample website for the Azure Webapps lab on Global Azure Bootcamp. 
+# Proyecto del curso AWS
+Proyecto del curso de AWS utilizando las siguientes tecnologías
+- PHP
+- Lambda
+- S3 Buckets
+- Dynamo DB
+- EC2 Instances
+- Load Balancers
+- VPC y subnets
