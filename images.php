@@ -44,8 +44,8 @@
                     if ( $_FILES['imageToUpload']['size'] < $maxsize) {  
 
                         // check whether uploaded file is of image type
-                        //$finfo = finfo_open(FILEINFO_MIME_TYPE);
-                        //if (strpos(finfo_file($finfo, $_FILES['imageToUpload']['tmp_name']), "image") === 0) {    
+                        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                        if (strpos(finfo_file($finfo, $_FILES['imageToUpload']['tmp_name']), "image") === 0) {    
 
                             // open the image file for insertion
                             //$imagefp = fopen($_FILES['imageToUpload']['tmp_name'], 'rb');
@@ -69,14 +69,14 @@
 
                             //header("Location: /");
                             exit;
-                        //}
-                        //else { // not an image
-                        //    echo '<script type="text/javascript">';
-                        //    echo 'alert("Uploaded file is not an image");';
-                        //    echo 'window.location.href = "/index.php";';
-                        //    echo '</script>';
-                        //    exit;
-                        //}
+                        }
+                        else { // not an image
+                            echo '<script type="text/javascript">';
+                            echo 'alert("Uploaded file is not an image");';
+                            echo 'window.location.href = "/index.php";';
+                            echo '</script>';
+                            exit;
+                        }
                     }
                     else { // file too large
                         echo '<script type="text/javascript">';
