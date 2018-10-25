@@ -70,8 +70,8 @@
             ?>
                 <div class='col-lg-2 col-md-4 col-sm-6 col-xs-12'>
                     <?php
-                        echo "<a href='image_display.php?id=".$image->name."' target='_blank'>";
-                        echo "<img class='img-responsive' src='image_display.php?id=".$image->name."&width=192' alt='' />";
+                        echo "<a href='image_display.php?id=".$image->id."' target='_blank'>";
+                        echo "<img class='img-responsive' src='thumb_display.php?id=".$image->id."&width=192' alt='' />";
                         echo "</a>";
                         echo "<p>".$image->name."</p>";
                     ?>

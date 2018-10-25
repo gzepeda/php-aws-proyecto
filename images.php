@@ -115,60 +115,60 @@
 
             return $images; 
 
-            //Esto ya no se usa pero lo dejo de referencia
-            $bucket = 'gzepeda-aws-proyecto';
+            // //Esto ya no se usa pero lo dejo de referencia
+            // $bucket = 'gzepeda-aws-proyecto';
 
-            // Instantiate the client.
-            $s3 = new S3Client([
-                'profile' => 'default',
-                'region' => 'us-east-1',
-                'version' => 'latest'
-            ]);
+            // // Instantiate the client.
+            // $s3 = new S3Client([
+            //     'profile' => 'default',
+            //     'region' => 'us-east-1',
+            //     'version' => 'latest'
+            // ]);
 
-            $images = array();
+            // $images = array();
 
-            try {
-                $objects = $s3->listObjects([
-                    'Bucket' => $bucket
-                ]);
-                foreach ($objects['Contents']  as $object) {
-                    $image = new Image;
-                    $image->key = $object['Key'];
-                    $image->link = $s3->getObjectUrl($bucket, $image->key);
-                    array_push($images,$image);
-                }
-            } catch (S3Exception $e) {
-                echo $e->getMessage() . PHP_EOL;
-            }
-            return $images;
+            // try {
+            //     $objects = $s3->listObjects([
+            //         'Bucket' => $bucket
+            //     ]);
+            //     foreach ($objects['Contents']  as $object) {
+            //         $image = new Image;
+            //         $image->key = $object['Key'];
+            //         $image->link = $s3->getObjectUrl($bucket, $image->key);
+            //         array_push($images,$image);
+            //     }
+            // } catch (S3Exception $e) {
+            //     echo $e->getMessage() . PHP_EOL;
+            // }
+            // return $images;
         }
 
-        public static function GetImage($keyname) {
+        public static function GetImage($id) {
 
             $database = new Database();
             $image = $database->FindImage($id);
             return $image;
             
-            //Esto ya no se usa
-            $bucket = 'gzepeda-aws-proyecto';
+            // //Esto ya no se usa
+            // $bucket = 'gzepeda-aws-proyecto';
 
-            // Instantiate the client.
-            $s3 = new S3Client([
-                'profile' => 'default',
-                'region' => 'us-east-1',
-                'version' => 'latest'
-            ]);
+            // // Instantiate the client.
+            // $s3 = new S3Client([
+            //     'profile' => 'default',
+            //     'region' => 'us-east-1',
+            //     'version' => 'latest'
+            // ]);
 
-            $image = new Image;
+            // $image = new Image;
 
-            try {
-                // Get the object.
-                $image->key = $keyname;
-                $image->link = $s3->getObjectUrl($bucket, $image->key);
+            // try {
+            //     // Get the object.
+            //     $image->key = $keyname;
+            //     $image->link = $s3->getObjectUrl($bucket, $image->key);
 
-            } catch (S3Exception $e) {
-                echo $e->getMessage() . PHP_EOL;
-            }
+            // } catch (S3Exception $e) {
+            //     echo $e->getMessage() . PHP_EOL;
+            // }
 
         }
     }

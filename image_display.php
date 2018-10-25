@@ -2,15 +2,14 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 'On');
 
-    if (isset($_GET['id']) === FALSE) die;
+    if ((isset($_GET['id']) && is_numeric($_GET['id'])) === FALSE) die;
 
     include "images.php";
     $imageId = $_GET['id'];
     $image = Images::GetImage($imageId);
 
     // get the source image attributes
-    $thumbnail = str_replace("gzepeda-aws-proyecto", "gzepeda-aws-proyectoresized", $image->link);
-    $srcImage = file_get_contents($thumbnail);
+    $srcImage = file_get_contents($image->image);
     $srcSize = getImageSizeFromString($srcImage);
     $srcWidth = $srcSize[0];
     $srcHeight = $srcSize[1];
@@ -26,7 +25,7 @@
         echo $srcImage;
         exit;
     }
-
+    
     // resize/resample the image to the requested size
     $destWidth = $_GET['width'];
     $destHeight = $destWidth * $srcSize[1] / $srcSize[0];
