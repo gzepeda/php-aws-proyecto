@@ -35,7 +35,7 @@
         public function UploadImage($imageName, $imageFP) {
             $sql = $this->link->prepare("INSERT INTO images (name, image) VALUES (:name, :image);");
             $sql->bindParam(":name", $imageName);
-            $sql->bindParam(":image", $imageFP, PDO::PARAM_LOB);
+            $sql->bindParam(":image", $imageFP);
 
             $sql->execute();
         
@@ -71,7 +71,7 @@
             $sql = "CREATE TABLE images (
                 id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
                 name VARCHAR(255) NOT NULL DEFAULT '',
-                image LONGBLOB NOT NULL
+                image VARCHAR(1000) NOT NULL
                 );";
 
             if ($this->link->query($sql) != TRUE) {

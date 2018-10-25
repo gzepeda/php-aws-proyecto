@@ -9,7 +9,8 @@
     $image = Images::GetImage($imageId);
 
     // get the source image attributes
-    $srcImage = file_get_contents($image->link);
+    $thumbnail = str_replace("gzepeda-aws-proyecto", "gzepeda-aws-proyectoresized", $image->link);
+    $srcImage = file_get_contents($thumbnail);
     $srcSize = getImageSizeFromString($srcImage);
     $srcWidth = $srcSize[0];
     $srcHeight = $srcSize[1];

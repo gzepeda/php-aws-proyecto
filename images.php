@@ -2,7 +2,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 'On');
 
-    //include "database.php";
+    include "database.php";
     require 'awssdk/aws-autoloader.php';
 
     use Aws\S3\S3Client;
@@ -33,6 +33,7 @@
             //Variables
             $file_name = $_FILES['imageToUpload']['name'];   
             $temp_file_location = $_FILES['imageToUpload']['tmp_name']; 
+            $bucket = 'gzepeda-aws-proyecto';
 
             // check associated error code
             //if ($_FILES['imageToUpload']['error'] == UPLOAD_ERR_OK) {
@@ -47,13 +48,6 @@
                         $finfo = finfo_open(FILEINFO_MIME_TYPE);
                         if (strpos(finfo_file($finfo, $_FILES['imageToUpload']['tmp_name']), "image") === 0) {    
 
-                            // open the image file for insertion
-                            //$imagefp = fopen($_FILES['imageToUpload']['tmp_name'], 'rb');
-
-                            // put the image in the db...
-                            //$database = new Database();
-                            //$id = $database->UploadImage($_FILES['imageToUpload']['name'], $imagefp);
-
                             $s3 = new Aws\S3\S3Client([
                                 'profile' => 'default',
                                 'region' => 'us-east-1',
@@ -61,13 +55,22 @@
                             ]);
                         
                             $result = $s3->putObject([
-                                'Bucket' => 'gzepeda-aws-proyecto',
-                                'Key'    => 'images/'.$file_name,
+                                'Bucket' => $bucket,
+                                'Key'    => $file_name,
                                 'SourceFile' => $temp_file_location, 
                                 'ACL'    => 'public-read'		
                             ]);
 
-                            //header("Location: /");
+                            $imageURL = $s3->getObjectUrl($bucket, $file_name);
+
+                            // open the image file for insertion
+                            //$imagefp = fopen($_FILES['imageToUpload']['tmp_name'], 'rb');
+
+                            // put the image in the db...
+                            $database = new Database();
+                            $id = $database->UploadImage($file_name, $imageURL);
+
+                            header("Location: index.php");
                             exit;
                         }
                         else { // not an image
@@ -104,6 +107,15 @@
         }
 
         public static function GetImages() {
+
+            //Get an array of image objects
+
+            $database = new Database();
+            $images = $database->GetAllImages();
+
+            return $images; 
+
+            //Esto ya no se usa pero lo dejo de referencia
             $bucket = 'gzepeda-aws-proyecto';
 
             // Instantiate the client.
@@ -117,8 +129,7 @@
 
             try {
                 $objects = $s3->listObjects([
-                    'Bucket' => $bucket, 
-                    'Prefix' => 'images/'
+                    'Bucket' => $bucket
                 ]);
                 foreach ($objects['Contents']  as $object) {
                     $image = new Image;
@@ -129,15 +140,16 @@
             } catch (S3Exception $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
-
-            //Get an array of image objects
-
-            //$database = new Database();
-            //$images = $database->GetAllImages();
             return $images;
         }
 
         public static function GetImage($keyname) {
+
+            $database = new Database();
+            $image = $database->FindImage($id);
+            return $image;
+            
+            //Esto ya no se usa
             $bucket = 'gzepeda-aws-proyecto';
 
             // Instantiate the client.
@@ -157,9 +169,7 @@
             } catch (S3Exception $e) {
                 echo $e->getMessage() . PHP_EOL;
             }
-            //$database = new Database();
-            //$image = $database->FindImage($id);
-            return $image;
+
         }
     }
 ?>
