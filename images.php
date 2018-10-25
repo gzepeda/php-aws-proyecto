@@ -3,7 +3,7 @@
     ini_set('display_errors', 'On');
 
     include "database.php";
-    require 'awssdk/aws-autoloader.php';
+    require 'vendor/autoload.php';
 
     use Aws\S3\S3Client;
     use Aws\S3\Exception\S3Exception;

@@ -63,6 +63,9 @@
     <div class="container-fluid">
         <div class="row">
             <?php
+                error_reporting(E_ALL);
+                ini_set('display_errors', 'On');
+
                 include "images.php";
                 $images = Images::GetImages();
                 //echo "<p>".count($images)."</p>";
@@ -70,6 +73,9 @@
             ?>
                 <div class='col-lg-2 col-md-4 col-sm-6 col-xs-12'>
                     <?php
+                        error_reporting(E_ALL);
+                        ini_set('display_errors', 'On');
+                        
                         echo "<a href='image_display.php?id=".$image->id."' target='_blank'>";
                         echo "<img class='img-responsive' src='thumb_display.php?id=".$image->id."&width=192' alt='' />";
                         echo "</a>";
