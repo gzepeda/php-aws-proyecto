@@ -23,11 +23,17 @@ steps:
   displayName: 'composer install'
 
 # Publish Build Artifacts
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: **
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 # Publish build artifacts to Azure Artifacts/TFS or a file share
 - task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'drop' 
+  #inputs:
+    #pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    #artifactName: 'drop' 
     #publishLocation: 'Container' # Options: container, filePath
     #targetPath: # Required when publishLocation == FilePath
     #parallel: false # Optional
