@@ -26,7 +26,8 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: **
+    Contents: |
+      **
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 # Publish build artifacts to Azure Artifacts/TFS or a file share
