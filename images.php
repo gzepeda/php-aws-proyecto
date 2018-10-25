@@ -29,7 +29,7 @@
 
         public static function Upload() {
 
-            $maxsize = 4194304; // set to 4 MB
+            $maxsize = 8388608; // set to 4 MB
             //Variables
             $file_name = $_FILES['imageToUpload']['name'];   
             $temp_file_location = $_FILES['imageToUpload']['tmp_name']; 
@@ -76,7 +76,7 @@
                         else { // not an image
                             echo '<script type="text/javascript">';
                             echo 'alert("Uploaded file is not an image");';
-                            echo 'window.location.href = "/index.php";';
+                            echo 'window.location.href = "index.php";';
                             echo '</script>';
                             exit;
                         }
@@ -84,7 +84,7 @@
                     else { // file too large
                         echo '<script type="text/javascript">';
                         echo 'alert("Uploaded file is too large");';
-                        echo 'window.location.href = "/index.php";';
+                        echo 'window.location.href = "index.php";';
                         echo '</script>';
                         exit;
                     }

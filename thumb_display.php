@@ -21,11 +21,11 @@
     // set the header for the image
     header("Content-type: ".$srcMime);
 
-    if ((isset($_GET['width']) && is_numeric($_GET['width'])) === FALSE) {
+    //if ((isset($_GET['width']) && is_numeric($_GET['width'])) === FALSE) {
         // no width requested - just return the source
         echo $srcImage;
         exit;
-    }
+    //}
     
     // resize/resample the image to the requested size
     $destWidth = $_GET['width'];

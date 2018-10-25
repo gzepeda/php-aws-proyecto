@@ -8,12 +8,12 @@
             // and therefore does not end up in public repos, etc.
             $connectionString = getenv("MYSQLCONNSTR_localdb");
             $varsString = str_replace(";","&", $connectionString);
-            parse_str($varsString);
+            parse_str($varsString, $parsedData);
 
-            $host = $Data_Source;
-            $user = $User_Id;
-            $pass = $Password;
-            $db = $Database;
+            $host = $parsedData["Data_Source"];
+            $db = $parsedData["Database"];
+            $user = $parsedData["User_Id"];
+            $pass = $parsedData["Password"];
             
             try{
                 $this->link = new PDO("mysql:host=".$host.";dbname=".$db, $user, $pass);

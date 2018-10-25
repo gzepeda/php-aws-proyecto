@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Images</title>
+    <title>Imágenes en AWS - GZepeda</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" 
@@ -51,7 +51,7 @@
                     //    $msg = $e->getMessage();
                     //    echo '<script type="text/javascript">';
                     //    echo 'alert("'.$msg.'");';
-                    //    echo 'window.location.href = "/index.php";';
+                    //    echo 'window.location.href = "index.php";';
                     //    echo '</script>';
                     //    exit;
                     //}
@@ -65,7 +65,7 @@
             <?php
                 include "images.php";
                 $images = Images::GetImages();
-                echo "<p>".count($images)."</p>";
+                //echo "<p>".count($images)."</p>";
                 foreach ($images as $image) {
             ?>
                 <div class='col-lg-2 col-md-4 col-sm-6 col-xs-12'>
